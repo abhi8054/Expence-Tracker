@@ -1,0 +1,25 @@
+.date-container{
+    border: 2px solid white;
+    padding: 15px;
+    margin-left:5px;
+    border-radius:10px;
+    color: white;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.day{
+    font-size: 28px;
+    font-weight: bold;
+
+}
+
+.year{
+    font-size: 18px;
+}
+.month{
+    font-size: 18px;
+}

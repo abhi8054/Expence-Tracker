@@ -1,0 +1,21 @@
+.expence-container{
+    margin: 0 50px;
+    background-color: rgb(87, 87, 87);
+    padding: 10px;
+    margin: auto;
+    width: 70%;
+    border: 2px solid white;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+@media screen and (max-width:450px) {
+
+    body{
+        border:1px solid red;
+    }
+
+    .expence-container{
+        width: 100%;
+    }
+}

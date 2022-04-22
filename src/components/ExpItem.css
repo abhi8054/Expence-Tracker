@@ -1,0 +1,32 @@
+.expItem-container{
+    display: flex;
+    align-items: center;
+    border: 1px solid black;
+    border-radius: 15px;
+    padding: 5px;
+    margin:10px 0;
+    background-color: grey;
+    box-shadow: 5px 5px 3px;
+}
+
+.description{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    color: white;
+    margin-left:15px ;
+    font-size: 25px;
+
+}
+.rsStyle{
+    border:2px solid white;
+    padding: 10px;
+    font-weight: bold;
+    border-radius: 10px;
+    background-color: black;
+}
+h3{
+    margin: 0;
+    padding: 0;
+}
