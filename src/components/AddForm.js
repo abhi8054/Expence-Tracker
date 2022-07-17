@@ -1,11 +1,14 @@
 import "./AddForm.css";
-import React from "react";
+import React,{useState} from "react";
+import {useDispatch} from "react-redux"
+import {addExpense,emptyState} from "../Redux/Slicers/expenseSlice"
 
-const AddForm = (props) =>{
+const AddForm = () =>{
+    const dispatch = useDispatch()
 
-    let [titleValue,setTitleValue] = React.useState("");
-    let [amountValue,setAmtValue] = React.useState("");
-    let [dateValue,setDateValue] = React.useState("");
+    const [titleValue,setTitleValue] = useState("");
+    const [amountValue,setAmtValue] = useState("");
+    const [dateValue,setDateValue] = useState("");
 
     const titleChangeHandler = (event)=>{
         setTitleValue(event.target.value);
@@ -18,16 +21,44 @@ const AddForm = (props) =>{
     const dateChangeHandler = (event)=>{
         setDateValue(event.target.value);
     }
+    const getData = () =>{
+        dispatch(emptyState())
+        fetch("http://localhost/API/php-fetchall-api.php",{
+        method:"GET",
+        }).then((response) =>{
+            return response.json()
+        }).then((data) =>{
+            for(let i = 0;i<data.length;i++){
+                dispatch(addExpense(data[i]))
+            }
+        })
+    }
 
-    let clickHandler = (event) =>{
+    const insertData =  (data) =>{
+       fetch("http://localhost/API/php-insert-api.php",{
+        method:"POST",
+        body: JSON.stringify(data),
+        }).then((response) =>{
+            return response.json()
+        }).then((data) =>{
+            if(data.status){
+                alert(data.message)
+                getData()
+            }
+        })
+    }
+
+    const clickHandler = (event) =>{
         event.preventDefault();
         if(amountValue !="" || dateValue != "" || titleValue != ""){
-            const newExpence ={
+            const newExpense = {
                 expTitle : titleValue,
                 expDate : new Date(dateValue),
                 expRate : parseInt(amountValue)
             }
-            props.getNewExpenceData(newExpence);
+
+            insertData(newExpense)
+
             setDateValue("");
             setTitleValue("");
             setAmtValue("");
@@ -40,19 +71,20 @@ const AddForm = (props) =>{
         <form onSubmit={clickHandler}>
             <div className="form-container">
                 <div className="exp-title center">
-                    <label>Enter Title : </label>
-                    <input type="text" placeholder="Title" value={titleValue} onChange={titleChangeHandler}/>
+                    <input type="text" placeholder="" value={titleValue} onChange={titleChangeHandler} required  />
+                    <label> Enter Title </label>
                 </div>
                 <div className="exp-date center">
-                    <label>Select Date : </label>
-                    <input type="date" value={dateValue} onChange={dateChangeHandler}/>
+                    <input type=" " value={dateValue} onChange={dateChangeHandler} required/>
+                    <label> Select Date </label>
                 </div>
                 <div className="exp-amt center">
-                    <label>Enter Amount : </label>
-                    <input type="number" placeholder="Amount" value={amountValue} onChange={amountChangeHandler}/>
+                   
+                    <input type="number" placeholder=" " value={amountValue} onChange={amountChangeHandler} required/>
+                    <label> Enter Amount </label>
                 </div>
                 <div className="btnadd center">
-                    <input type="submit" value="ADD Expence"/>
+                    <input type="submit" value="ADD Expense"/>
                 </div>
             </div>
         </form>

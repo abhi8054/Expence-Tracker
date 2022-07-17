@@ -1,11 +1,11 @@
 .expItem-container{
     display: flex;
     align-items: center;
-    border: 1px solid black;
+    border: 1px solid #00dfc4;
     border-radius: 15px;
-    padding: 5px;
-    margin:10px 0;
-    background-color: grey;
+    padding: 1rem 1rem;
+    margin:12px 0;
+    gap: 1rem;
     box-shadow: 5px 5px 3px;
 }
 
@@ -17,16 +17,44 @@
     color: white;
     margin-left:15px ;
     font-size: 25px;
-
 }
+
 .rsStyle{
-    border:2px solid white;
+    border:1px solid #00dfc4;
     padding: 10px;
     font-weight: bold;
     border-radius: 10px;
-    background-color: black;
+    color:#00dfc4;
+    background-color: #1d2b3a;
 }
 h3{
     margin: 0;
     padding: 0;
+}
+.btn-control{
+    display:flex ;
+    justify-content: center;
+    align-items: center;
+}
+
+@media screen and (max-width:600px) {
+    .description{
+        font-size: 20px;
+        justify-content: space-around;
+    }
+
+    .btn-control .up-date .MuiSvgIcon-root{
+        font-size: 1.1rem !important;
+        width: 100px;
+    }
+
+    .expItem-container{
+        flex-direction: column;
+        gap:1rem;
+    }
+    .btn-control{
+        justify-content: space-around;
+        width: 100%;
+    }
+   
 }

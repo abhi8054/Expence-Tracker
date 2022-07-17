@@ -1,68 +1,37 @@
 import "./App.css";
-import React from "react";
-
-import Expences from "./components/Expences";
+import React,{useEffect} from "react";
+import Expenses from "./components/Expenses";
 import ExpNew from "./components/ExpNew";
-
-
-let DUMMY_EXP = [];
+import {useDispatch} from "react-redux"
+import {addExpense,emptyState} from "./Redux/Slicers/expenseSlice"
 
 
 const App = () => {
-    const [expArray,setExpArray]=React.useState(DUMMY_EXP);
-    const [editVal,setVal]=React.useState();
+    const dispatch = useDispatch();
 
-
-
-    function getData(){
-        fetch("http://localhost/Rest%20API/php-fetchall-api.php")
-        .then((responce) =>{
-            return responce.json();
-        }).then((data)=>{
-            setExpArray(data);
+    const getData = () =>{
+        dispatch(emptyState())
+        fetch("http://localhost/API/php-fetchall-api.php",{
+        method:"GET",
+        }).then((response) =>{
+            return response.json()
+        }).then((data) =>{
+            for(let i = 0;i<data.length;i++){
+                dispatch(addExpense(data[i]))
+            }
         })
     }
 
-    React.useEffect(()=>{
-        getData();
-    },[]);
-
-    const getNewExpActual = (recievedNewExpActual) =>{
-        
-        const dataGet = JSON.stringify(recievedNewExpActual);
-        fetch("http://localhost/Rest%20API/php-insert-api.php",{
-            method:'POST',
-            body:dataGet
-        }).then(responce =>{
-            getData();
-        });
-    };
-
-    const getExpNewIdVal =(getid)=>{
-        const obj={
-            id:getid,
-        }
-        fetch("http://localhost/Rest%20API/php-delete-api.php",{
-            method:'POST',
-            body:JSON.stringify(obj)
-        }).then(responce =>{
-            getData();
-        });
-    }
-
-   
-    return(
+    useEffect(() => {
+        getData()
+    },[])
+    
+    return(      
         <div>
             <h1>My Expense Item Details</h1>
-            <ExpNew getNewExpActualData = {getNewExpActual} />
-
-                <Expences
-                    item={expArray}
-                    getExpNewId ={getExpNewIdVal}
-                   >
-                </Expences>
+            <ExpNew />
+            <Expenses />
         </div>
     );
 }
-
 export default App;

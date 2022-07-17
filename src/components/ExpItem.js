@@ -1,21 +1,24 @@
 import "./ExpItem.css";
 import React from "react";
-
+import { Update } from "@material-ui/icons";
 import ExpDate from "./ExpDate";
 import Button from "./Button";
+import UpdateExpense from "./UpdateExpense";
+import { useDispatch,useSelector } from "react-redux";
+import {handleTab,handleId} from "../Redux/Slicers/updateSlice"
+
+
 const ExpItem = (props) => {
+    const dispatch = useDispatch(0)
+    const flag = useSelector((allState) => (allState.status.flag))
 
-
-
-    const getExpId =(id)=>{
-        props.getIdNew(id);
-    }
-   
-    const upData = (val)=>{
-        props.updata(val);
+    const updateHandle = (val) =>{
+        dispatch(handleTab(true))
+        dispatch(handleId(val))
     }
 
     return(
+    <>
         <div className="expItem-container">
             <div className="date-style">
                 <ExpDate
@@ -26,13 +29,14 @@ const ExpItem = (props) => {
                 <h3>{props.title}</h3>
                 <div className="rsStyle">${props.rate}</div> 
             </div>
-            <div>
-                <Button keyValue ={props.id}
-                        getId={getExpId}
-                ></Button>
-               
+            <div className="btn-control">
+                <Button id={props.id}></Button>
+
+                <button className="up-date" onClick={() =>updateHandle(props.id)}><Update /></button>
             </div>
         </div>
+        {flag && <UpdateExpense />}
+    </>
     );
 }
 
