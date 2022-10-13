@@ -1,0 +1,35 @@
+.date-container{
+    border: 1px solid black;
+    padding: 15px;
+    margin-left:5px;
+    border-radius:10px;
+    color: black;
+    background-color: #00dfc4;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.day{
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.year{
+    font-size: 18px;
+}
+.month{
+    font-size: 18px;
+}
+@media screen and (max-width:600px) {
+    .date-container{
+      flex-direction: row-reverse;
+      gap:2rem;
+    }
+    .year,.month{
+        font-size: 28px;
+        font-weight: bold;
+    }
+    
+}

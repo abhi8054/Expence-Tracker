@@ -1,0 +1,68 @@
+.container-update{
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.339);
+    position: fixed;
+    left: 0;
+    right: 0;
+    top:0;
+    bottom: 0;
+    z-index: 1;
+    color: aliceblue;
+}
+
+.wrapper{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.myForm{
+    width: 55%;
+    padding: 4rem;
+    background-color: #1d2b3a;
+    border-radius: 30px;
+    position: relative;
+
+}
+.form-container-up{
+    display: flex;
+    flex-direction: column;
+}
+.form-container-up div {
+    position: relative;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px;
+    transition: all 0.4s;
+}
+.cancel{
+    width: fit-content;
+    padding: 0;
+    margin:0;
+    position: absolute;
+    right:2%;
+    top:4%
+}
+.cancel button{
+    background: transparent;
+    border: none;
+}
+.can .MuiSvgIcon-root{
+    font-size: 2rem !important;
+}
+
+@media screen and (max-width:700px){
+    .myForm{
+        width: 70%;
+        padding: 3rem;
+    
+    }
+} 
+@media screen and (max-width:700px){
+    .myForm{
+        width: 90%;
+    }
+} 
